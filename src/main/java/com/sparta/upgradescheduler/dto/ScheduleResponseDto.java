@@ -31,6 +31,6 @@ public class ScheduleResponseDto {
         this.username = schedule.getUsername();
         this.title = schedule.getTitle();
         this.content = schedule.getContent();
-        this.commentList = schedule.getCommentList();
+        this.commentList = schedule.getComments();
     }
 }
