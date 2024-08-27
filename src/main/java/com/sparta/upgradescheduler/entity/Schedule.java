@@ -3,10 +3,6 @@ package com.sparta.upgradescheduler.entity;
 import com.sparta.upgradescheduler.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +13,24 @@ public class Schedule extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "schedule_id")
     private Long scheduleId;
+
+    @Column(nullable = false, length = 20)
     private String username;
+
+    @Column(nullable = false, length = 20)
     private String title;
+
+    @Column(length = 200)
     private String content;
 
     @OneToMany(mappedBy = "schedule")
-    private List<Comment> commentList = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
+
+    // 삭제 여부
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean isDeleted = false;
 
     public Schedule(ScheduleRequestDto dto){
         this.username = dto.getUsername();
