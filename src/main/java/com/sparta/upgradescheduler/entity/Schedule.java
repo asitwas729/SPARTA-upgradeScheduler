@@ -1,6 +1,6 @@
 package com.sparta.upgradescheduler.entity;
 
-import com.sparta.upgradescheduler.dto.ScheduleRequestDto;
+import com.sparta.upgradescheduler.dto.schedule.ScheduleCreateRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class Schedule extends Timestamped {
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private Boolean isDeleted = false;
 
-    public Schedule(ScheduleRequestDto dto){
+    public Schedule(ScheduleCreateRequestDto dto){
         this.username = dto.getUsername();
         this.title = dto.getTitle();
         this.content = dto.getContent();

@@ -1,7 +1,7 @@
 package com.sparta.upgradescheduler.service;
 
-import com.sparta.upgradescheduler.dto.ScheduleRequestDto;
-import com.sparta.upgradescheduler.dto.ScheduleResponseDto;
+import com.sparta.upgradescheduler.dto.schedule.ScheduleCreateRequestDto;
+import com.sparta.upgradescheduler.dto.schedule.ScheduleCreateResponseDto;
 import com.sparta.upgradescheduler.entity.Schedule;
 import com.sparta.upgradescheduler.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
@@ -14,14 +14,18 @@ public class ScheduleService {
         this.scheduleRepository = scheduleRepository;
     }
 
-    public ScheduleResponseDto createSchedule(ScheduleRequestDto dto){
-        // requestDto -> entity
+    public ScheduleCreateResponseDto createSchedule(ScheduleCreateRequestDto dto){
+        // 생성: 회원 엔티티
         Schedule schedule = new Schedule(dto);
 
-        // DB 저장
+        // DB 저장 : 회원
         Schedule saveSchedule = scheduleRepository.save(schedule);
 
-        // entity -> responsedto
-        return new ScheduleResponseDto(saveSchedule);
+        // 반환 응답
+        return new ScheduleCreateResponseDto(
+            saveSchedule.getScheduleId(),
+            "created",
+            201
+        );
     }
 }
