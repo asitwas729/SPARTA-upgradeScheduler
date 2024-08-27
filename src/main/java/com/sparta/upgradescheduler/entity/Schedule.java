@@ -1,6 +1,7 @@
 package com.sparta.upgradescheduler.entity;
 
 import com.sparta.upgradescheduler.dto.schedule.ScheduleCreateRequestDto;
+import com.sparta.upgradescheduler.dto.schedule.ScheduleDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import java.util.ArrayList;
@@ -40,5 +41,10 @@ public class Schedule extends Timestamped {
 
     public Schedule() {
 
+    }
+
+    public void update(ScheduleDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
     }
 }
