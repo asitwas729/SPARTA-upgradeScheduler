@@ -34,7 +34,7 @@ public class Schedule extends Timestamped {
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private Boolean isDeleted = false;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "schedule" ,fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private List<UserAndSchedule> userAndSchedule = new ArrayList<>();
 
     public Schedule(ScheduleCreateRequestDto dto){

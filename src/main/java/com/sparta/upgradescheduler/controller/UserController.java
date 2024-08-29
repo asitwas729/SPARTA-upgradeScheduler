@@ -2,11 +2,9 @@ package com.sparta.upgradescheduler.controller;
 
 import com.sparta.upgradescheduler.dto.user.UserRequestDto;
 import com.sparta.upgradescheduler.dto.user.UserResponseDto;
+import com.sparta.upgradescheduler.entity.User;
 import com.sparta.upgradescheduler.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,5 +18,10 @@ public class UserController {
     @PostMapping("/user/save")
     public UserResponseDto createUser(@RequestBody UserRequestDto dto){
         return userService.createUser(dto);
+    }
+
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable("id") Long id){
+        return userService.getUser(id);
     }
 }

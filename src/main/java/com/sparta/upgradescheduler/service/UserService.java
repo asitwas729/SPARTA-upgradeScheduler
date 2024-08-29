@@ -14,6 +14,7 @@ public class UserService {
         this.userRespository = userRespository;
     }
 
+    // 유저 저장
     public UserResponseDto createUser(UserRequestDto dto){
         User user = new User(dto);
         User saveUser = userRespository.save(user);
@@ -23,4 +24,22 @@ public class UserService {
             201
         );
     }
+    
+    // 단건 조회
+    public User getUser(Long id){
+        return userRespository.findById(id).orElseThrow(() ->
+            new IllegalArgumentException("선택한 유저는 존재하지않습니다.")
+        );
+    }
+    
+    
+    // 전체 조회
+    
+    
+    
+    // 삭제
+    
+    
+    
+    
 }
