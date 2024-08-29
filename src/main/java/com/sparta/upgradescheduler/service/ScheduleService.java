@@ -67,5 +67,13 @@ public class ScheduleService {
         return scheduleDtoList;
     }
 
+    @Transactional
+    public Long deleteSchedule(Long scheduleId) {
+        // 일정 삭제
+        scheduleRepository.deleteById(scheduleId);
+
+        return scheduleId;
+    }
+
 
 }
