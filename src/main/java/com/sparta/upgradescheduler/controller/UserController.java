@@ -1,10 +1,13 @@
 package com.sparta.upgradescheduler.controller;
 
+import com.sparta.upgradescheduler.dto.user.UserListResonseDto;
 import com.sparta.upgradescheduler.dto.user.UserRequestDto;
 import com.sparta.upgradescheduler.dto.user.UserResponseDto;
 import com.sparta.upgradescheduler.entity.User;
 import com.sparta.upgradescheduler.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -23,5 +26,10 @@ public class UserController {
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable("id") Long id){
         return userService.getUser(id);
+    }
+
+    @GetMapping("/user")
+    public UserListResonseDto getUserList(){
+        return userService.getUserList();
     }
 }
