@@ -19,6 +19,9 @@ public class User extends Timestamped{
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(length = 50)
+    private String username;
+
     @Column(length = 200)
     private String email;
 
@@ -27,5 +30,6 @@ public class User extends Timestamped{
 
     public User(UserRequestDto dto){
         this.email = dto.getEmail();
+        this.username = dto.getUsername();
     }
 }
