@@ -3,6 +3,7 @@ package com.sparta.upgradescheduler.entity;
 import com.sparta.upgradescheduler.dto.schedule.ScheduleCreateRequestDto;
 import com.sparta.upgradescheduler.dto.schedule.ScheduleDto;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Schedule extends Timestamped {
     @Column(length = 200)
     private String content;
 
-    @OneToMany(mappedBy = "schedule")
+    @OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     // 삭제 여부
@@ -46,5 +47,12 @@ public class Schedule extends Timestamped {
     public void update(ScheduleDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
+    }
+
+    @Builder
+    public Schedule(String username, String title, String content){
+        this.username = username;
+        this.title = title;
+        this.content = content;
     }
 }

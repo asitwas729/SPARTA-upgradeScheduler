@@ -1,12 +1,15 @@
 package com.sparta.upgradescheduler.service;
 
-import com.sparta.upgradescheduler.dto.schedule.ScheduleCreateRequestDto;
-import com.sparta.upgradescheduler.dto.schedule.ScheduleCreateResponseDto;
-import com.sparta.upgradescheduler.dto.schedule.ScheduleDto;
+import com.sparta.upgradescheduler.dto.schedule.*;
 import com.sparta.upgradescheduler.entity.Schedule;
 import com.sparta.upgradescheduler.repository.ScheduleRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ScheduleService {
@@ -47,5 +50,22 @@ public class ScheduleService {
 
         return scheduleId;
     }
+
+    @Transactional
+    public List<ScheduleResponseDto> getScheduleList(){
+        List<Schedule> all = scheduleRepository.findAllByOrderByModifiedAtDesc();
+        List<ScheduleResponseDto> scheduleDtoList = new ArrayList<>();
+
+        for(Schedule schedule : all){
+            ScheduleResponseDto scheduleDto = ScheduleResponseDto.builder()
+                .username(schedule.getUsername())
+                .title(schedule.getTitle())
+                .content(schedule.getContent())
+                .build();
+            scheduleDtoList.add(scheduleDto);
+        }
+        return scheduleDtoList;
+    }
+
 
 }
